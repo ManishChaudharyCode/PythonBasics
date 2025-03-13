@@ -58,9 +58,25 @@ def delete_all(videos):
         print("i:",videos[i-1])
         del videos[i-1]
         save_data_helper(videos)
+        
 
 
-
+def filter_videos(videos):
+    video_type = int(input("inter 1 for public video or inter 2 for private video"))
+    if(video_type ==1 ):
+        for index,video in enumerate(videos, start=1):
+            if(video["videoType"] == "public"):
+                print(f"{index}. {video['name']}, duration: {video['time']} description: {video['description']} videoType: {video['videoType']}")
+    elif(video_type == 2):
+       for index,video in enumerate(videos, start=1):
+            if(video["videoType"] == "private"):
+                print(f"{index}. {video['name']}, duration: {video['time']} description: {video['description']} videoType: {video['videoType']}")
+    else: print("Invalid Input")
+            
+             
+            
+            
+                  
 
 def main():
     videos = load_data( )
@@ -71,10 +87,9 @@ def main():
         print("3. Update a youtube video: ")
         print("4. Delete a youtube video: ")
         print("5. Delete all youtube video: ")
-        print("6. Exit app")
+        print("6. filter videos according to video type: ")
+        print("7. Exit app")
         choice = input("Inter the choice: ")
-        print(videos)
-
         match choice:
             case '1':
                 list_all_videos(videos)
@@ -87,6 +102,8 @@ def main():
             case '5':
                 delete_all(videos)
             case '6':
+                filter_videos(videos)
+            case '7':
                 break
             case _:
                 print("Invaid choice")
